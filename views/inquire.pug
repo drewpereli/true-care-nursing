@@ -1,0 +1,36 @@
+extends layout/layout
+
+block mixins
+    include mixins/form
+    include mixins/applicant-fields
+    include mixins/fade-in
+
+block head
+    block head
+    script.
+        gtag('config', 'AW-716352524/eukDCMGAgagBEIzYytUC', {
+        'phone_conversion_number': '626-818-2420'
+        });
+        gtag('config', 'AW-716352524/NhknCP6BgagBEIzYytUC', {
+            'phone_conversion_number': '316-337-5559'
+        });
+
+block content
+    .spacer-top
+    .spacer
+    .row
+        .h2.col-12.text-center.my-5: +fade-in('Get in Touch')
+    .row.p-4
+        .col-12.col-md-8
+            +form
+                +applicant-fields
+        .col-12.col-md-4.p-4
+            each a, i in contactInfo.addresses
+                .subsection.m-3.p-3.black(class="subsection-" + (i+1))
+                    .col-12= a.street 
+                    .col-12 #{a.city}, #{a.state} #{a.zip}
+                    .col-12 Phone: 
+                        a(href="tel:+01-" + a.phone) #{a.phone}
+                    .col-12 Fax: #{a.fax}
+                    .spacer.w-100
+                    .spacer.w-100

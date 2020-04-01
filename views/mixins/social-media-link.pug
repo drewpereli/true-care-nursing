@@ -1,0 +1,9 @@
+include icon
+
+mixin social-media-link(site, extraClasses="")
+    a(
+        class=extraClasses
+        href=contactInfo.socialMediaURLs[site]
+        target="_blank"
+    )
+        +icon(site, true)

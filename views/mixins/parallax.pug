@@ -1,0 +1,17 @@
+include /mixins/fade-in
+mixin parallax(image, ops={})
+    .jumbotron.parallax.p-0.align-items-center.d-flex(
+        style='background-image: url("/img/' + image + '.jpg");'
+        class='h-' + (ops.height ? ops.height : '100')
+        id=ops.id ? ops.id : ''
+    )
+        .parallax-inner.h-100.w-100.align-items-center.d-flex(class= (ops.darken === false ? '' : 'darken'))
+            if ops.header || block
+                .row.p-4.w-100.h-100.align-items-center.m-0
+                    if ops.header
+                        h1.mt-5.parallax-header.d-block.d-md-none.text-center.w-100.fade-in-right: +fade-in(ops.header, ops.includesHTML)
+                        h5.mt-5.parallax-header.display-2.d-none.d-md-block.w-100.p-5.fade-in-right(
+                            class='text-' + (ops.align ? ops.align : 'center')
+                        ): +fade-in(ops.header, ops.includesHTML)
+                    if block
+                        block

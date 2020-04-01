@@ -1,0 +1,30 @@
+mixin fade-cycle(id, texts=false, showFor=3, fadeFor=.4)
+    .fade-in-cycle(id=id)
+        if texts
+            each text, i in texts
+                .cycle-text(
+                    id = id + '-' + i
+                    class = 'cycle-' + (i === 0 ? 'show' : 'hide')
+                    data-next= '#' + id + '-' + (i === texts.length - 1 ? 0 : i+1)
+                )!= text
+
+        script.
+            $(() => {
+                $('##{id} .cycle-hide').hide();
+                setInterval(function(){
+                    const   fadeFor = #{fadeFor},
+                            showFor = #{showFor}
+                    const id = '#' + '#{id}';
+                    const toHide = $(id + ' .cycle-show');
+                    const toShow = $(toHide.data('next'));
+                    toHide
+                        .removeClass('cycle-show')
+                        .addClass('cycle-hide')
+                        .fadeOut(fadeFor*1000, function(){
+                        toShow.removeClass('cycle-hide').addClass('cycle-show').fadeIn(fadeFor*1000)
+                    });
+                    //- $(toHide).removeClass('cycle-show').addClass('cycle-hide').fadeOut(#{fadeFor}*1000, function(){
+                    //-     toShow.removeClass('cycle-hide').addClass('cycle-show').fadeIn(#{fadeFor}*1000)
+                    //- });
+                }, (#{showFor} + 2*#{fadeFor} + 1) * 1000)
+            });

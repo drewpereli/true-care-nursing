@@ -1,0 +1,7 @@
+mixin fade-in(text, inculdesHTML=false)    
+    .fade-in
+        if (!inculdesHTML)
+            each word in text.split(' ')
+                span.fade-word= word + ' '
+        else
+            span.fade-word!= text

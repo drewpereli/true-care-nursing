@@ -1,0 +1,6 @@
+mixin form(action)
+    form(action=action method="post" encType="multipart/form-data")
+        if block
+            block
+        .spacer
+        .form-row: .col: button.btn.btn-primary(type="submit") Submit

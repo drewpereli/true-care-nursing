@@ -1,0 +1,23 @@
+include /mixins/social-media-link
+
+nav.navbar.navbar-expand-md#main-nav
+  button.navbar-toggler(
+    type='button' 
+    data-toggle='collapse' 
+    data-target='#navbar' 
+    aria-controls='navbarSupportedContent' 
+    aria-expanded='false' 
+    aria-label='Toggle navigation'
+  ) 
+    i.fas.fa-bars
+  a.navbar-brand(href="/"): img(src="/img/logo.png" height="40")
+  span.navbar-toggler-icon
+  #navbar.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      each page in pages
+        li.nav-item.px-md-3
+          a.nav-link(href=page.path) #{page.title}
+    ul.navbar-nav.ml-auto
+      each _, site in contactInfo.socialMediaURLs
+        li.nav-item
+          +social-media-link(site, 'nav-link mx-md-3')

@@ -1,0 +1,9 @@
+include field
+mixin file(id, ops={})
+    +field(id, ops)
+        input.form-control-file(
+                    type='file'
+                    id=id
+                    name=id
+                    required=(ops.required === false ? false : true)
+                )

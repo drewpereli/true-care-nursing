@@ -1,0 +1,122 @@
+extends layout/layout
+
+block mixins
+    include mixins/parallax
+    include mixins/fade-in
+    include mixins/fade-in-on-scroll
+    include mixins/fade-cycle
+    include mixins/icon
+    include mixins/work-perks
+    include mixins/rss-feed
+    include mixins/twitter-feed
+    include mixins/social-media-link
+
+block head
+    script.
+        gtag('config', 'AW-716352524/eukDCMGAgagBEIzYytUC', {
+        'phone_conversion_number': '626-818-2420'
+        });
+        gtag('config', 'AW-716352524/NhknCP6BgagBEIzYytUC', {
+            'phone_conversion_number': '316-337-5559'
+        });
+
+block content
+    +parallax('nurse1', {
+        darken: true,
+        header: '<img src="/img/logo.png" id="header-logo" />',
+        align: 'left',
+        isHeader: true,
+        includesHTML: true
+    })
+        .col-12.col-md.d-none.d-md-block
+            .w-100.black 
+            - var headers = [];
+            - var hStart = '<h1 class="col-12 text-left font-weight-bold outline">';
+            - var hEnd = '</h1>';
+            - var spacer = '<div class="w-100"></div>';
+            - var tStart = '<div class="col-12 col-md-8 text-left main-header-cycle-content outline">';
+            - var tEnd = '</div>';
+            for i in [0,1,2,3]
+                case i
+                    when 0
+                        -var header = 'Commitment to Our Clients';
+                        -var text = 'Each of our staff is handpicked and vetted to meet our clients\' specific needs.';
+                    when 1
+                        -var header = '24/7 Support';
+                        -var text = 'Our staffing experts are available 24 hours a day, 7 days a week to discuss your staffing needs.';
+                    when 2
+                        -var header = 'Customized Staffing Solutions';
+                        -var text = 'Our staffing solutions offer short term, long term and permanent placement of allied health professionals.';
+                    when 3
+                        -var header = 'Flexible Coverage';
+                        -var text = 'We provide high quality last minute staffing solutions and specialize in emergency staffing needs.';
+                - var entry = hStart + header + hEnd + tStart + text + tEnd;
+                - headers.push(entry)
+            +fade-cycle('header-cycle', headers, 7, 1)
+        .col-12.col-md
+            h4.w-100.text-center.black: a.btn.btn-success.btn-lg(href='/hire') Need Staffing?
+            each number in contactInfo.emergencyStaffingPhones
+                h4.font-weight-bold.w-100.text-center.black 
+                    a(href='tel:+01-' + number)= number
+        .col-12.col-md.d-none.d-md-block
+            +rss-feed
+    .g-1.p-4.section
+        .row
+            .col-12.col-md-8.offset-md-2.text-center
+                    h2.text-center Striving For <span class="accent">Excellence</span> In Our Delivery Of Quality Care
+        .row.p-4
+            .col-12.col-md-6.d-flex.flex-column.subsection.subsection-1.p-3
+                - var text = 'At TrueCare Nursing, we believe that nothing should compromise with quality care. We have built our reputation as one of the most trusted sources of supplemental staffing for healthcare facilities. We provide safe, timely, effective, efficient, equitable and cost effective client and patient centered service. We value our relationships with our clients and as a result, we hold ourselves and our staff to the highest standards. Our staff is our reputation and as a result we undertake on a rigorous recruitment and training process to qualify each of our staff and tailor them to each individual client needs. We only solicit professionals who are able to and willing to offer long term value to our clients. We are dedicated to excellence and look forward to having an opportunity to service your next staffing needs.';
+                    img(src="/img/logo.png")                
+                    +fade-in-on-scroll(text, .03)
+                //- +twitter-feed()
+                //- .w-100.spacer
+            .col-12.col-md-5.offset-md-1.d-flex.flex-column.align-content-between
+                //- h3.my-5 Whatever your needs are, <span class="accent">we can meet them</span>            
+                - var services = ['Critical Care (CCU)', 'Intensive Care (ICU)', 'Rehabilitation', 'Emergency Room', 'Telemetry', 'Med Surg', 'Labor & Delivery', 'Cath Lab', 'OR & PACU'];
+                a.service-slide-container.text-center.my-5.p-3(href="/hire")
+                    +fade-cycle('services-cycle', services)
+                .my-5 
+                    .row.my-5.d-flex.justify-content-around
+                        each _, site in contactInfo.socialMediaURLs
+                            .text-center
+                                +social-media-link(site, 'content-social-link')
+                .my-5.d-block: +twitter-feed()
+        
+    +parallax('computer', {
+        height: 50
+    })
+    .row.g-3.p-4.section
+        each i in [0,1,2]
+            case i
+                when 0
+                    -var header = 'Striving for <span class="accent">Quality</span>';
+                    -var text = 'TrueCare nursing offers exceptional quality. Each nurse is hand-picked and the average nurse has 5 years of experience in their specialty.';
+                    -var imgSrc = '/img/stock-1.jpg';
+                when 1
+                    -var header = 'Dedication to <span class="accent">Excellence</span>';
+                    -var text = 'TrueCare Nursing has extensive experience providing supplemental nurse staffing for our client hospitals to meet daily (per-diem), long term, and travel nurse assignment needs. ';
+                    -var imgSrc = '/img/stock-3.jpg';
+                when 2
+                    -var header = '24/7 Customer <span class="accent">Support</span>';
+                    -var text = 'We are available online! Update your resume on our website and get connected with us.';
+                    -var imgSrc = '/img/stock-4.jpg';
+            .row.m-2.my-5
+                .col-md-8.col-12.p-2.subsection(
+                    class="subsection-" + (i+1)
+                    class="order-" + (i % 2 === 0 ? 'first' : 'last')
+                )
+                    h3.col-12.font-weight-bold!= header
+                    .col-12.p-4.subsection-inner: +fade-in-on-scroll(text)
+                .col-md-1
+                .col-md-3.d-md-block.d-none(class="order-" + (i % 2 === 0 ? 'last' : 'first'))
+                    img.br.box-shadow.img-fluid(src=imgSrc)
+    +parallax('stock-4', {
+        height: 50
+    })
+    .row.g-2.p-4.section
+        //- .col-12.text-center.p-4
+        h3.col-12.text-center We Are a <span class="accent">Top Rated</span> Staffing Company
+        .w-100
+        +work-perks(4)
+    +parallax('stethascope', { height: 50 })

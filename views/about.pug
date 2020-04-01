@@ -1,0 +1,55 @@
+extends layout/layout
+
+block mixins
+    include mixins/parallax
+    include mixins/fade-in-on-scroll
+    mixin section(title, text, ops={})
+        .row.p-5.section(
+            class=ops.gradient ? 'g-' + ops.gradient : ''
+            id=ops.id?ops.id:''
+        )
+            - for (var i = 0 ; i < 5 ; i++)
+                .w-100.spacer
+            h3.col-12.col-md-4.text-md-right= title
+            .col-12.col-md-6
+                +fade-in-on-scroll(text, .02)
+
+block content
+    //- +parallax('nurse2', {
+    //-     darken: true,
+    //-     header: 'About',
+    //-     isHeader: true,
+    //-     align: 'right'
+    //- })  
+    +section(
+        'About Us',
+        `
+            TrueCare Nursing is a top rated staffing company.
+            We specialize in per diem, travel, and permanent placements. We offer last minute staffing solutions.
+            Our rates are unbeatable and we do not compromise with quality when selecting our staff.
+            We are owned and operated by nurses and as a result we understand the unique needs of each individual client.
+            We handpick each of our staff and offer them training to exceed our clients' specific needs.
+            Our nurses are our reputation and as a result we only recruit the most qualified individuals.
+            Our staff have a proven record of success working with our clients. Let us know how
+            we can meet your staffing needs today.
+        `,
+        {gradient: 'dark'}
+    )     
+    +parallax('computer', {height: 50})
+        .col.col-md-5.parallax-text.p-4.g-dark
+            h4.col-12.btn.btn-primary.btn-lg.dropdown-btn.w-100(data-toggles="#mission-text") Mission
+            #mission-text.dropdown-content.col-12.h-0.
+                Our mission is to provide professional and trusted recruitment, training and placement of highly qualified professionals in a timely, cost effective and workable manner.   
+        .col-12.col-md-5.offset-md-2.parallax-text.p-4.g-dark
+            h4.col-12.btn.btn-primary.btn-lg.dropdown-btn.w-100(data-toggles="#vission-text") Vision
+            #vission-text.dropdown-content.col-12.h-0.
+                We continue to achieve our vision of being the most trusted staffing agency in the industry. Our primary goal is to solicit, train and place professionals who add immediate long term value to our clients. 
+                
+    //- +section(
+    //-     'Vision',
+    //-     `
+    //-         We continue to achieve our vision of being the most trusted staffing agency in the industry. Our primary goal is to solicit, train and place professionals who add immediate long term value to our clients. 
+    //-     `,
+    //-     {gradient: 2}
+    //- )
+    //- +parallax('stethascope', {height: 50})

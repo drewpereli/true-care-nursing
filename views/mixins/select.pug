@@ -1,0 +1,6 @@
+include field
+mixin select(id, ops={})
+    +field(id, ops)
+        select.form-control(id=id name=id)
+            each val in ops.options
+                option(value=val) #{labelify(val)}

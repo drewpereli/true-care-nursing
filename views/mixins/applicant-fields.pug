@@ -1,0 +1,25 @@
+include text
+include select
+mixin applicant-fields
+    .form-row
+        +text('first-name')
+        +text('last-name')
+    .form-row
+        +select('Position', {
+            options: [
+                'nurse-practitioner',
+                'registered-nurse',
+                'licensed-practical-nurse',
+                'certified-medication-assistant',
+                'certified-nursing-assistant',
+                'social-worker',
+                'respiratory-therapist'
+            ]
+        })
+        +text('email')
+    .form-row
+        +text('phone', {type: 'tel'})
+        +select('best-time-to-contact', {options: [
+            'morning', 'afternoon', 'evening'
+        ]})
+       

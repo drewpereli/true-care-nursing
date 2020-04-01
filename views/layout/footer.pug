@@ -1,0 +1,38 @@
+include /mixins/social-media-link
+
+#footer.row.d-flex.align-items-center.p-1.px-5
+    - var year = (new Date()).getFullYear();
+    .row.w-100.p-3
+        .col-12.col-md-6.offset-md-3.text-center &copy; #{year} TrueCare Nursing
+        .col-12.col-md-3.text-center Website by 
+            a(href="https://pereliwebworks.com" target="_blank") Drew Pereli
+    .col-12.col-md-3.mb-3
+        each page in pages
+            a.footer-link(href=page.path)= page.title
+    each a in contactInfo.addresses
+        .col-12.col-md-4.mb-3
+            span #{a.street}, 
+            br 
+            span #{a.city}, #{a.state} #{a.zip} 
+            br
+            span Phone: #{a.phone}
+            br
+            span Fax: #{a.fax}
+    .col-12.col-md-1.mb-3.text-align-right
+        each _, site in contactInfo.socialMediaURLs
+            +social-media-link(site, 'footer-link')
+            br
+    script.
+        document.addEventListener('click', function(e){
+            if(e.target.innerText.indexOf("Need Staffing?") != -1){
+            gtag('event', 'conversion', {'send_to': 'AW-716352524/6y_JCPOF-qcBEIzYytUC'});
+                }
+                });
+                window.addEventListener('load', function(){
+                    var timer = setInterval(function(){
+                    if(document.querySelector('.alert-success').innerText.indexOf('Application Submitted!') != -1){
+                        gtag('event', 'conversion', {'send_to': 'AW-716352524/6rDTCJ36gKgBEIzYytUC'});
+                        clearInterval(timer)
+                    }
+                    },700);
+                });

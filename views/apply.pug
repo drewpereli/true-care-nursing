@@ -1,0 +1,55 @@
+extends layout/layout
+
+block mixins
+    include mixins/form
+    include mixins/applicant-fields
+    include mixins/text
+    include mixins/file
+    include mixins/parallax
+    include mixins/work-perks
+    include mixins/fade-in
+block content
+    .spacer-top   
+    .w-100.spacer
+    .w-100.spacer
+    .w-100.spacer
+    .row.w-100.fade-in-on-scroll.text-center
+        for service in ['Travel Opportunities', 'Per Diem', 'Full Employment']
+            .col-12.col-md-4.text-center.h3.fade-word: strong= service
+    .w-100.spacer
+    .row.w-100.fade-in-on-scroll.text-center
+        for icon in ['ambulance', 'briefcase-medical', 'user-md']
+            .col-12.col-md-4.text-center.h1.fade-word
+                +icon(icon)
+    .row.g-1.p-4
+        .col-12.col-md-5.offset-md-1.p-3
+            .h2.text-center.my-5: +fade-in('Apply')
+            +form
+                +applicant-fields
+                .spacer
+                .form-row
+                    +file('resume', {required: false})
+                .spacer
+                h4 References
+                for i in [1,2]
+                    h5 Reference #{i}
+                    .form-row
+                        +text('reference-' + i + '-name', {label: 'Name'})
+                    .form-row
+                        +text('reference-' + i + '-company', {label: 'Company'})
+                    .form-row
+                        +text('reference-' + i + '-position', {label: 'Position'})    
+                        +text('reference-' + i + '-phone', {label: 'Phone', type: 'tel'})
+                .spacer
+                h4 Most Recent Employer
+                .form-row
+                    +text('employer-company-name', {label: 'Company Name'})
+                .form-row
+                    +text('employer-manager-name', {label: 'Manager\'s Name'})
+                .form-row
+                    +text('employer-phone', {label: 'Phone', type: 'tel'})
+                    +text('employer-email', {label: 'Email', required: false})
+        .col-12.col-md-4.offset-md-2.p-0
+            +work-perks(12)
+    .spacer-bottom
+

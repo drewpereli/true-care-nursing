@@ -1,0 +1,10 @@
+include field
+mixin text(id, ops={})
+    +field(id, ops)
+        input.form-control(
+                    type=ops.type ? ops.type : 'text'
+                    id=id
+                    name=id
+                    placeholder=ops.placeholder
+                    required=(ops.required === false ? false : true)
+                )

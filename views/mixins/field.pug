@@ -1,0 +1,7 @@
+mixin field(id, ops={})
+    .col-12.col-md
+        - var label = labelify(ops.label ? ops.label : id);
+        - if (ops.required === false) label += ' (optional)'
+        label(for=id)= label
+        if block
+            block

@@ -1,0 +1,6 @@
+{
+    "uid": "truecare",
+    "script": "server.js",
+    "watch": "true",
+    "watchIgnore": "node_modules/*"
+}

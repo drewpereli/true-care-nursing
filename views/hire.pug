@@ -1,0 +1,33 @@
+extends layout/layout
+
+block mixins
+    include mixins/form
+    include mixins/text
+    include mixins/select
+    include mixins/work-perks
+    include mixins/fade-in
+
+block content
+    .spacer-top
+    .spacer.w-100
+    .spacer.w-100
+    .spacer.w-100
+    .spacer.w-100
+    .row
+        .col-8.offset-2.text-center
+            +fade-in("<h3>Inquiries made here will be responded to within 24 hours. For emergency staffing needs, call " + contactInfo.emergencyStaffingPhones[0] + ' or ' + contactInfo.emergencyStaffingPhones[1] + "</h3>", true)
+    .row
+        .col-10.offset-1
+            +form
+                .form-row
+                    +text('organization')
+                .form-row
+                    +text('first-name')
+                    +text('last-name')
+                .form-row
+                    +text('phone', {type: 'tel'})
+                    +text('email', {type: 'email'})
+                .form-row
+                    +select('best-time-to-reach', {options: ['morning', 'afternoon', 'evening']})
+    .row.p-3
+        +work-perks(4)

@@ -1,0 +1,23 @@
+mixin work-perks(span, spaceBetween=false)   
+    //- h3 Striving For Excellence In Our Delivery Of Quality Care
+    - for (var i = 0 ; i < 3 ; i++)
+        case i
+            when 0
+                - var img = 'conference-room';
+                - var heading = 'Work Anywhere';
+                - var text = 'Providing placement for nurses and allied staff in Los Angeles and all over California. Will reimburse for relocation and will help with obtaining credentials. This is an excellent career choice for nurses who have a minimum of 12 months recent acute care clinical experience and want to advance their careers, salaries, or lifestyles.';
+            when 1
+                - var img = 'smiling-team';
+                - var heading = 'Flexible Schedule';
+                - var text = 'Choose from a variety of options including permanent, per firm, travel and temporary placement. Our dedicated team is available 7 days a week and will find the right position for you. We strive to match our nurses with the most appropriate assignment. With us your profession equates to limitless opportunities!';
+            when 2
+                - var img = 'hand-shake';
+                - var heading = '24-Hour Support';
+                - var text = 'Our dedicated staff is available at your fingertips, they will respond to email, phone and text messages. Applications are also accepted 7 days a week and placements and rates can be discussed via phone. If you have questions regarding travel nursing employment, opportunities, careers, or jobs, We\'ll be available every possible moment. ';
+        .my-5.p-md-5.col-12(
+            class = 'col-md-' + span
+        )
+            .apply-img-section.box-shadow
+                img.col-12.img-fluid.br.p-0(src="/img/" + img + ".jpg").mb-5
+                h4.btn.btn-primary.btn-lg.col-12.mb-2.apply-img-heading.dropdown-btn(data-toggles="#apply-img-text-" + i): strong= heading
+                .col-12.apply-img-text.dropdown-content(id="apply-img-text-" + i)= text
